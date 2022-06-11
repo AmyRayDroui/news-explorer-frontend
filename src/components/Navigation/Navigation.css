@@ -1,0 +1,33 @@
+.navigation {
+    background: rgba(196, 196, 196, 0.01);
+    box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
+    min-height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navigation__title {
+    margin: 0;
+    justify-self: start;
+    font-family: 'Roboto Slab';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.2;
+}
+
+.navigation__container {
+    height: 100%;
+}
+
+.navigation__link {
+    height: 100%;
+    color: white;
+    text-decoration: none;
+    border: none;
+}
+
+.navigation__link_active {
+    border-bottom: solid white 3px;
+}
