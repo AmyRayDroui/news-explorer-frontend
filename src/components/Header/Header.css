@@ -2,5 +2,27 @@
     min-height: 576px;
     background-image: url(../../images/search-form_background.jpg);
     background-size: cover;
-    color: white
+    color: white;
+}
+
+.header__container {
+    padding: 160px 416px 80px;
+}
+
+.header__title {
+    font-family: 'Roboto Slab';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 60px;
+    line-height: 1.066;
+    margin: 0;
+}
+
+.header__text {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.33;
+    margin: 32px 0 88px;  
 }

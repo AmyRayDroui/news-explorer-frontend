@@ -19,15 +19,71 @@
 
 .navigation__container {
     height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 34px;
 }
 
 .navigation__link {
-    height: 100%;
-    color: white;
+    color: #B6BCBF;
     text-decoration: none;
     border: none;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.33;
+    padding: 0 11px;
+}
+
+.navigation__link_logged-in {
+    margin-right: 21px;
 }
 
 .navigation__link_active {
+    color: white;
+    padding-bottom: 27px;
+    padding-top: 30px;
     border-bottom: solid white 3px;
+    align-self: flex-end;
+}
+
+.navigation__button {
+    color: inherit;
+    background-color: transparent;
+    border: white 1px solid;
+    border-radius: 100px;
+}
+
+.navigation__button_type_exit {
+    display: flex;
+    align-items: center;
+    padding: 12px 17px 12px 19px;
+}
+
+.navigation__button_type_sign-in {
+    box-sizing: content-box;
+    min-width: 152px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.33;
+    padding: 12px;
+}
+
+.navigation__exit-name {
+    margin: 0;
+    min-width: 56px;
+    text-align: left;
+}
+
+.navigation__exit-icon {
+    background-image: url(../../images/exit-white-icon.svg);
+    min-height: 16px;
+    min-width: 18px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 2px;
 }
