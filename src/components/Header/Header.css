@@ -26,3 +26,9 @@
     line-height: 1.33;
     margin: 32px 0 88px;  
 }
+
+@media screen and (max-width:1270px){
+    .header__container {
+      padding: 38px 220px 48px;
+    }
+  }

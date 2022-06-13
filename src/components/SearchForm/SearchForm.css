@@ -19,10 +19,6 @@
   margin: 21px 40px 21px 24px; 
 }
 
-.search-form__input:focus {
-  border: none;
-}
-
 .search-form__button {
   background-color: #2F71E5;
   color: inherit;

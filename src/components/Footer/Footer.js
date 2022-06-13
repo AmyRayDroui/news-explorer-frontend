@@ -10,7 +10,7 @@ function Footer() {
           <div className="footer__container_type_general">
             <nav className="footer__container_type_links">
                 <NavLink exact to='/' className="footer__link">Home</NavLink>
-                <a href="https://www.practicum100.com/" className="footer__link">Practicum by Yandex</a>
+                <a href="https://www.practicum100.com/" target="_blank" className="footer__link">Practicum by Yandex</a>
             </nav>
             <div className="footer__container_type_media">
                 <a className="footer__media" href="https://github.com/AmyRayDroui/news-explorer-frontend" >
