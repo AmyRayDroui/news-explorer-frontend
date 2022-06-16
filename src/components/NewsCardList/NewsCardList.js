@@ -1,12 +1,21 @@
 import './NewsCardList.css';
+import { useLocation } from 'react-router-dom';
 import Preloader from '../Preloader/Preloader';
 import NewsCard from '../NewsCard/NewsCard';
-import searchResults from '../../utils/temp_storage';
+import { searchResults, savedResults } from '../../utils/temp_storage';
 
 function NewsCardList() {
+    const currPath = useLocation().pathname;
     const found = true;
     return (
-      <section className="news-list page__wrapper">
+      <>
+      { currPath==='/saved-news' ? 
+        <section className="news-list news-list_type_saved page__wrapper">
+          {
+            savedResults.map((cardElement) => <NewsCard card={cardElement} />)
+          }
+        </section>:
+        <section className="news-list page__wrapper">
         {/*<Preloader />*/}
         {found ?
             <>
@@ -26,6 +35,8 @@ function NewsCardList() {
             </>
         }
       </section>
+      }
+      </>
     );
   }
   

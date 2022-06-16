@@ -10,15 +10,15 @@ function NewsCard({ card }) {
     return (
       <div className="news-card">
         <div className="news-card__image" style={{ backgroundImage: `url(${card.link})` }}></div>
-        { currPath=='/saved-news' ? 
+        { currPath==='/saved-news' ? 
         <>    
-            <h4 className="news-card__keyword">{card.keyword}</h4> 
-            <button type="button" className="news-card__button news-card__button_type_remove"></button>
-            <p className="news-card__button-hover-text">Remove from saved</p>
+            <h4 className="news-card__bubble news-card__keyword">{card.keyword}</h4> 
+            <button type="button" className="news-card__bubble news-card__button news-card__button_type_remove"></button>
+            <p className="news-card__bubble news-card__button-hover-text">Remove from saved</p>
         </>:
         <>
-            <button type="button" className="news-card__button news-card__button_type_save"></button>
-            <p className="news-card__button-hover-text">Sign in to save articles</p>
+            <button type="button" className="news-card__bubble news-card__button news-card__button_type_save"></button>
+            <p className="news-card__bubble news-card__button-hover-text">Sign in to save articles</p>
         </>
         }
         <div className="new-card__text-container">

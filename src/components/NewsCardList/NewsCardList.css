@@ -9,6 +9,15 @@
     padding-bottom: 80px;
 }
 
+.news-list_type_saved {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 16px;
+    padding-top: 62px;
+    padding-bottom: 62px;
+}
+
 .news-list__title {
     align-self: flex-start;
     margin: 0;
@@ -42,6 +51,10 @@
     font-weight: 500;
     font-size: 18px;
     line-height: 1.33;
+}
+
+.news-list__show-more:hover {
+    background-color: #E8E8E8;
 }
 
 .news-list__not-found-icon {
