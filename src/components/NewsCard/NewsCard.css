@@ -1,0 +1,112 @@
+.news-card {
+    position: relative;
+    background-color: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.news-card__image {
+    min-height: 272px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.news-card__button {
+    position: absolute;
+    right: 24px;
+    top: 24px;
+    min-width: 40px;
+    min-height: 40px;
+    background-color: #fff;
+    border: none;
+    border-radius: 8px;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: none;
+}
+
+.news-card__button-hover-text {
+    position: absolute;
+    box-sizing: border-box;
+    right: 69px;
+    top: 24px;
+    min-height: 40px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 11px 20px;
+    margin: 0;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.16;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    display: none;
+}
+
+.news-card__button:hover + .news-card__button-hover-text {
+    display: flex;
+}
+
+.news-card__button_type_save {
+    background-image: url('../../images/icons/grey-bookmark-icon.svg');
+}
+
+.news-card__button_type_save:hover {
+    background-image: url('../../images/icons/black-bookmark-icon.svg');
+}
+
+.news-card__button_type_remove {
+    background-image: url('../../images/icons/grey-bin-icon.svg');
+}
+
+.news-card__button_type_remove:hover {
+    background-image: url('../../images/icons/black-bin-icon.svg');
+}
+
+.new-card__text-container {
+    display: grid;
+    grid-template-rows: 36px 76px 128px 20px;
+    padding: 20px 24px 24px;
+}
+
+.new-card__date {
+    color: #B6BCBF;
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.33;
+    margin: 0;
+}
+
+.new-card__title {
+    font-family: 'Roboto Slab';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1.15;
+    margin: 0;
+}
+
+.new-card__text {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.38;
+    margin: 0;
+}
+
+.new-card__source {
+    color: #B6BCBF;
+    font-family: 'Roboto Slab';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.25;
+    margin: 0;
+}
