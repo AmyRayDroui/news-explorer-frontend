@@ -15,10 +15,15 @@ function NewsCardList() {
                 {
                     searchResults.map((cardElement) => <NewsCard card={cardElement} />)
                 }
-                </div>    
+                </div>
+                <button className='news-list__show-more'>Show more</button>
             </>
             :
-            <h2 className='news-list__title news-list__title_type_not-found'>Nothing found</h2>
+            <>
+              <div className='news-list__not-found-icon'></div>
+              <h2 className='news-list__title news-list__title_type_not-found'>Nothing found</h2>
+              <p className='news-list__not-found-text'>Sorry, but nothing matched your search terms.</p>
+            </>
         }
       </section>
     );
