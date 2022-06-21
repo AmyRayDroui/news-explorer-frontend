@@ -109,11 +109,18 @@
 
 .new-card__text {
     min-height: 110px;
+    max-width: 352px;
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 1.38;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    white-space: normal;
     margin: 0;
     margin-bottom: 18px;
 }

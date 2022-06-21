@@ -10,17 +10,13 @@
 }
 
 .news-list_type_saved {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 16px;
-    padding-top: 62px;
-    padding-bottom: 62px;
+    padding: 62px 102px;
 }
 
 .news-list__title {
     align-self: flex-start;
     margin: 0;
+    margin-bottom: 64px;
     font-family: 'Roboto Slab';
     font-style: normal;
     font-weight: 400;
@@ -38,7 +34,6 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 16px;
-    margin: 64px 0;
 }
 
 .news-list__show-more {
@@ -46,6 +41,7 @@
     border: none;
     border-radius: 80px;
     padding: 20px 98px;
+    margin-top: 64px;
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 500;

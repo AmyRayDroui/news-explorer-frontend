@@ -9,7 +9,7 @@ function Footer() {
           <p className="footer__copyright">© 2021 Supersite, Powered by News API</p>
           <div className="footer__container_type_general">
             <nav className="footer__container_type_links">
-                <NavLink exact to='/' className="footer__link">Home</NavLink>
+                <NavLink exact="true" to='/' className="footer__link">Home</NavLink>
                 <a href="https://www.practicum100.com/" target="_blank" className="footer__link">Practicum by Yandex</a>
             </nav>
             <div className="footer__container_type_media">

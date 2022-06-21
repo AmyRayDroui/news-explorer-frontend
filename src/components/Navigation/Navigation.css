@@ -7,6 +7,11 @@
     align-items: center;
 }
 
+.navigation_type_black-font {
+    color: #1A1B22;
+    border-color: #1A1B22;
+}
+
 .navigation__title {
     margin: 0;
     justify-self: start;
@@ -41,17 +46,23 @@
 }
 
 .navigation__link_active {
-    color: white;
+    color: inherit;
     padding-bottom: 27px;
     padding-top: 30px;
-    border-bottom: solid white 3px;
+    border-bottom: solid 3px;
+    border-color: inherit;
     align-self: flex-end;
+}
+
+.navigation__link_type_black {
+    color: inherit;
 }
 
 .navigation__button {
     color: inherit;
     background-color: transparent;
-    border: white 1px solid;
+    border: 1px solid;
+    border-color: inherit;
     border-radius: 100px;
 }
 
@@ -86,4 +97,8 @@
     background-repeat: no-repeat;
     background-position: center;
     margin-left: 2px;
+}
+
+.navigation__exit-icon_type_black {
+    background-image: url(../../images/icons/exit-black-icon.svg);
 }

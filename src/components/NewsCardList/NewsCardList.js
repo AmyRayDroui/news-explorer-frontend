@@ -11,9 +11,11 @@ function NewsCardList() {
       <>
       { currPath==='/saved-news' ? 
         <section className="news-list news-list_type_saved page__wrapper">
+          <div className='news-list__container'>
           {
             savedResults.map((cardElement) => <NewsCard card={cardElement} />)
           }
+          </div>
         </section>:
         <section className="news-list page__wrapper">
         {/*<Preloader />*/}
@@ -22,7 +24,7 @@ function NewsCardList() {
                 <h2 className='news-list__title'>Search results</h2>
                 <div className='news-list__container'>
                 {
-                    searchResults.map((cardElement) => <NewsCard card={cardElement} />)
+                    searchResults.map((cardElement, index) => <NewsCard key={index} card={cardElement} />)
                 }
                 </div>
                 <button className='news-list__show-more'>Show more</button>
