@@ -1,6 +1,6 @@
 import './PopupWithForm.css';
 
-function PopupWithForm({children, isOpen, onClose, onSubmit, name, title}) {
+function PopupWithForm({children, isOpen, onClose, onSubmit, validInput, name, title, redirectText, redirectOnClick, popupGeneralErrorMessage}) {
     return (
       <div className={`popup popup_type_${name} ${isOpen ? 'popup_visible' : ''}`}>
         <div className="popup__container">
@@ -8,8 +8,13 @@ function PopupWithForm({children, isOpen, onClose, onSubmit, name, title}) {
           <h2 className="popup__title">{title}</h2>
           <form onSubmit={onSubmit} className="popup__form" name={name}>
             {children}
-            <button type="submit" className="popup__submit-button" aria-label="Submit">{title}</button>
+            <p className="popup__error popup__general-error-message">{popupGeneralErrorMessage}</p>
+            <button type="submit" disabled={!validInput} className="popup__submit-button" aria-label="Submit">{title}</button>
           </form>
+          <div className="popup__redirect">
+            <p className="popup__redirect-text">or</p>
+            <button className="popup__redirect-button" onClick={redirectOnClick}>{redirectText}</button>
+          </div>
         </div> 
       </div>
     );
