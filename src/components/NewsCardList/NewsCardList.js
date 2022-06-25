@@ -13,7 +13,7 @@ function NewsCardList() {
         <section className="news-list news-list_type_saved page__wrapper">
           <div className='news-list__container'>
           {
-            savedResults.map((cardElement) => <NewsCard card={cardElement} />)
+            savedResults.map((cardElement, index) => <NewsCard key={index} card={cardElement} />)
           }
           </div>
         </section>:

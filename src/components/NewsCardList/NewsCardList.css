@@ -72,3 +72,37 @@
     margin: 0;
     margin-top: 16px;
 }
+
+@media screen and (max-width:950px){
+    .news-list {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+    
+    .news-list_type_saved {
+        padding: 32px 40px;
+    }
+    
+    .news-list__title {
+        margin-bottom: 32px;
+        font-size: 30px;
+        line-height: 1.13;
+    }
+    
+    .news-list__title_type_not-found {
+        align-self: center;
+        font-size: 26px;
+    }
+    
+    .news-list__container {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 8px;
+    }
+    
+    .news-list__show-more {
+        padding: 16px 74px;
+        margin-top: 32px;
+    }
+}

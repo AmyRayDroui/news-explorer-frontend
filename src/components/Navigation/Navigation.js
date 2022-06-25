@@ -14,7 +14,7 @@ function Navigation() {
             <Link to='/saved-news' className={`navigation__link navigation__link_logged-in ${currPath === '/saved-news' && 'navigation__link_active'}`}>Saved articles</Link>
             <button className="navigation__button navigation__button_type_exit">
               <h3 className="navigation__exit-name">Elise</h3>
-              <div className={`navigation__exit-icon ${ currPath === '/saved-news' && 'navigation__exit-icon_type_black' }`}></div>
+              <div className={`navigation__exit-icon ${ currPath === '/saved-news' && 'navigation__exit-icon_type_black'}`}></div>
             </button> 
           </>:
             <button className="navigation__button navigation__button_type_sign-in">Sign in</button> 

@@ -31,4 +31,38 @@
     .header__container {
       padding: 38px 220px 48px;
     }
-  }
+}
+
+@media screen and (max-width:900px){
+    .header {
+        min-height: 400px;
+    }
+    
+    .header__container {
+        padding: 38px 163px 48px;
+    }
+    
+    .header__title {
+        font-size: 36px;
+        line-height: 1.11;
+        margin: 0;
+    }
+    
+    .header__text {
+        margin: 16px 0 48px;  
+    }
+}
+
+@media screen and (max-width:650px){
+    .header {
+        min-height: 536px;
+    }
+    
+    .header__container {
+        padding: 30px 19px 32px;
+    }
+    
+    .header__text {
+        margin: 16px 0 122px;  
+    }
+}

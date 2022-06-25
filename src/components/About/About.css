@@ -30,3 +30,43 @@
     line-height: 1.33;
     margin: 0;
 }
+
+@media screen and (max-width:1100px){
+    .about {
+        min-height: 354px;
+    }
+    
+    .about__image {
+        max-height: 232px;
+        max-width: 232px;
+        margin: 61px 32px 61px 0;
+    }
+    
+    .about__container {
+        margin-top: 40px;
+        margin-right: 0;
+    }
+    
+    .about__title {
+        font-size: 30px;
+        line-height: 1.33;
+        margin-bottom: 16px;
+    }
+}
+
+  @media screen and (max-width:550px){
+    .about {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .about__image {
+        max-height: 272px;
+        max-width: 272px;
+        margin: 32px 0 24px;
+    }
+    
+    .about__container {
+        margin: 0 0 128px;
+    }
+}

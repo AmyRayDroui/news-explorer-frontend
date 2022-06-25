@@ -16,7 +16,7 @@ function App() {
         <Route path='/' element={<Main />} />
       </Routes>
       <Footer />
-      <SigningPopup></SigningPopup>\
+      <SigningPopup></SigningPopup>
       <SignupPopup></SignupPopup>
     </div>
   );

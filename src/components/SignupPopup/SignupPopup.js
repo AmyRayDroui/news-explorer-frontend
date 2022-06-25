@@ -19,7 +19,7 @@ function SignupPopup() {
     }
 
     return (
-    <PopupWithForm isOpen={true} onClose={null} onSubmit={null} validInput={true} name="signup" title="Sign up" redirectText="Sign in" redirectOnClick={null} popupGeneralErrorMessage="This email is not available">
+    <PopupWithForm isOpen={false} onClose={null} onSubmit={null} validInput={true} name="signup" title="Sign up" redirectText="Sign in" redirectOnClick={null} popupGeneralErrorMessage="This email is not available">
         <h4 className="popup__input-title">Email</h4>
         <input type="email" value={email} name="email" onChange={handleEmailChange} className="popup__input popup__input_type_email" id="signup-email-input" placeholder="Enter email" required minLength="5" maxLength="40"/>
         <span className="popup__error name-input-error">Error</span>

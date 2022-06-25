@@ -1,9 +1,18 @@
-
-.page {
-  
-}
-
 .page__wrapper {
   padding-right: 104px;
   padding-left: 104px;
+}
+
+@media screen and (max-width:950px){
+  .page__wrapper {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+
+@media screen and (max-width:550px){
+  .page__wrapper {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
 }
