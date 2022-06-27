@@ -95,14 +95,25 @@
     }
     
     .news-list__container {
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
         grid-gap: 8px;
     }
     
     .news-list__show-more {
         padding: 16px 74px;
         margin-top: 32px;
+    }
+}
+
+@media screen and (max-width:620px){
+    .news-list__container {
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+    }
+}
+
+@media screen and (max-width:375px){
+    .news-list__container {
+        grid-template-columns: 1fr;
+        grid-gap: 10px;
     }
 }

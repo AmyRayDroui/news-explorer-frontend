@@ -3,7 +3,7 @@
 }
 
 .news-header__page-location {
-    margin: 40px 0 28px;
+    margin: 120px 0 28px;
     opacity: 50%;
     font-family: 'Roboto';
     font-style: normal;
@@ -41,7 +41,7 @@
     }
 
     .news-header__page-location {
-        margin: 24px 0 16px;
+        margin: 64px 0 16px;
         font-size: 14px;
         line-height: 1.71;
     }

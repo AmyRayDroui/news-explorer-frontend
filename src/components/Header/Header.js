@@ -1,18 +1,28 @@
 import './Header.css';
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
-import SearchForm from '../SearchForm/SearchForm';
 
-function Header() {
-    return (
-      <header className="header">
-        <Navigation />
-        <div className="header__container">
-          <h1 className="header__title">What's going on in the world?</h1>
-          <p className="header__text">Find the latest news on any topic and save them in your personal account.</p>
-          <SearchForm></SearchForm>
-        </div>
-      </header>
-    );
+
+function Header({isMobileNavOpen, onClosePopups, onOpenMobileNav}) {
+  const currPath = useLocation().pathname;
+
+  function handleMobilePopupToggle() {
+    if(isMobileNavOpen) {
+      onClosePopups();
+    } else {
+      console.log(typeof(onOpenMobileNav))
+      onOpenMobileNav();
+    }
+  }
+
+  return (
+    <header className={ `header page__wrapper ${currPath==='/saved-news' && "header_type_black-font"} ${isMobileNavOpen && "header_mobile-nav"}` }>
+      <h2 className='header__title'>NewsExplorer</h2>
+      <button onClick={handleMobilePopupToggle} className={`header__mobile-button ${ currPath === '/saved-news' && 'header__mobile-button_color_black'} ${isMobileNavOpen && "header__mobile-button_type_close"}`}></button>
+      <Navigation mobileNavOpen={isMobileNavOpen} onLinkClick={onClosePopups}/>
+    </header>
+  );
   }
   
   export default Header;

@@ -1,36 +1,22 @@
 .navigation {
-    background: rgba(196, 196, 196, 0.01);
-    box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
-    min-height: 80px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.navigation_type_black-font {
-    color: #1A1B22;
-    border-color: #1A1B22;
-}
-
-.navigation__title {
-    margin: 0;
-    justify-self: start;
-    font-family: 'Roboto Slab';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 1.2;
-}
-
-.navigation__container {
     height: 100%;
     display: flex;
     align-items: center;
     gap: 34px;
 }
 
-.navigation__container_type_popup {
-    
+.navigation_type_mobile {
+    position: absolute;
+    width: 100%;
+    height: fit-content;
+    top: 56px;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+    background-color: #1A1B22;
+    padding: 16px 16px 24px;
 }
 
 .navigation__link {
@@ -55,10 +41,10 @@
     padding-top: 30px;
     border-bottom: solid 3px;
     border-color: inherit;
-    align-self: flex-end;
+ 
 }
 
-.navigation__link_type_black {
+.navigation__link_color_black {
     color: inherit;
 }
 
@@ -103,33 +89,16 @@
     margin-left: 2px;
 }
 
-.navigation__exit-icon_type_black {
+.navigation__exit-icon_color_black {
     background-image: url(../../images/icons/exit-black-icon.svg);
 }
 
 
-.navigation_mobile-button {
-    display: none;
-    background-color: transparent;
-    background-image: url(../../images/icons/menu-white-icon.svg);
-    min-height: 24px;
-    min-width: 24px;
-    border: none;
-    padding: none;
-}
 
-
-.navigation_mobile-button_type_black {
-    background-image: url(../../images/icons/menu-black-icon.svg);
-}
 
 
 @media screen and (max-width:950px){
     .navigation {
-        min-height: 66px;
-    }
-    
-    .navigation__container {
         gap: 20px;
     }
     
@@ -167,11 +136,22 @@
 }
 
 @media screen and (max-width:550px){   
-    .navigation__container {
+    .navigation {
         display: none;
+        box-sizing: border-box;
     }
 
-    .navigation_mobile-button {
-        display: block;
+    .navigation_type_mobile {
+        display: flex;
+    }
+
+    .navigation__link {
+        border: none;
+        padding: 0;
+    }
+
+    .navigation__button {
+        align-self: stretch;
+        justify-content: center;
     }
 }

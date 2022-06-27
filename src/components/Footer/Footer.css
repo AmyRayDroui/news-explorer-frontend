@@ -70,3 +70,24 @@
         min-width: 88px;
     }
 }
+
+@media screen and (max-width:500px){   
+    .footer{
+        flex-direction: column-reverse;
+    }
+
+    .footer__container_type_general {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .footer__container_type_links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+
+    .footer__link { 
+        min-width: 0;
+    }
+}

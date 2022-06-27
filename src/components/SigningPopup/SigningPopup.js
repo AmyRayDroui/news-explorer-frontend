@@ -1,7 +1,7 @@
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 import { useState } from 'react';
 
-function SigningPopup() {
+function SigningPopup({onClose, isOpen, redirectOnClick}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -15,7 +15,7 @@ function SigningPopup() {
 
 
     return (
-    <PopupWithForm isOpen={false} onClose={null} onSubmit={null} validInput={true} name="signin" title="Sign in" redirectText="Sign up" redirectOnClick={null} popupGeneralErrorMessage="This email is not available">
+    <PopupWithForm isOpen={isOpen} onClose={onClose} onSubmit={null} validInput={true} name="signin" title="Sign in" redirectText="Sign up" redirectOnClick={redirectOnClick} popupGeneralErrorMessage="This email is not available">
         <h4 className="popup__input-title">Email</h4>
         <input type="email" value={email} name="email" onChange={handleEmailChange} className="popup__input popup__input_type_email" id="signin-email-input" placeholder="Enter email" required minLength="5" maxLength="40"/>
         <span className="popup__error name-input-error">Error</span>
