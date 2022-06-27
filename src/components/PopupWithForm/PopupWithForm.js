@@ -1,8 +1,9 @@
 import './PopupWithForm.css';
+import Popup from '../Popup/Popup';
 
 function PopupWithForm({children, isOpen, onClose, onSubmit, validInput, name, title, redirectText, redirectOnClick, popupGeneralErrorMessage}) {
     return (
-      <div className={`popup popup_type_${name} ${isOpen ? 'popup_visible' : ''}`}>
+      <Popup isOpen={isOpen} name={name}>
         <div className="popup__container">
           <button type="button" className="popup__close-button" onClick={onClose} aria-label="Close popup" />
           <h2 className="popup__title">{title}</h2>
@@ -16,7 +17,7 @@ function PopupWithForm({children, isOpen, onClose, onSubmit, validInput, name, t
             <button className="popup__redirect-button" onClick={redirectOnClick}>{redirectText}</button>
           </div>
         </div> 
-      </div>
+      </Popup>
     );
   }
   

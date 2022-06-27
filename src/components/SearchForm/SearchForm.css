@@ -1,6 +1,7 @@
 .search-form {
   width: 100%;
   display: flex;
+  justify-content: space-between;
   max-height: 64px;
   background-color: #fff;
   border-radius: 100px;
