@@ -14,11 +14,7 @@
     margin: 32px 0 26px;
 }
 
-.footer__container_type_general {
-    display: flex;
-}
-
-.footer__container_type_links {
+.footer__container {
     display: flex;
 }
 
@@ -74,11 +70,17 @@
 @media screen and (max-width:500px){   
     .footer{
         flex-direction: column-reverse;
+        padding-top: 20px;
+    }
+
+    .footer__copyright {
+        margin: 38px 0 22px;
     }
 
     .footer__container_type_general {
         width: 100%;
         justify-content: space-between;
+        margin: 0;
     }
 
     .footer__container_type_links {
@@ -89,5 +91,6 @@
 
     .footer__link { 
         min-width: 0;
+        text-align: left;
     }
 }

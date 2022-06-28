@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 
-function Navigation({ mobileNavOpen, onLinkClick}) {
+function Navigation({ mobileNavOpen, onLinkClick, onOpenSigningPopup}) {
   const currPath = useLocation().pathname;
   const isLoggedIn = true;
   return (
@@ -12,12 +12,12 @@ function Navigation({ mobileNavOpen, onLinkClick}) {
       { isLoggedIn ?
       <>
         <Link to='/saved-news' onClick={onLinkClick} className={`navigation__link navigation__link_logged-in ${currPath === '/saved-news' && 'navigation__link_active'}`}>Saved articles</Link>
-        <button className={`navigation__button navigation__button_type_exit ${mobileNavOpen && 'navigation__button_type_mobile'}`}>
+        <button onClick={onOpenSigningPopup} className={`navigation__button navigation__button_type_exit ${mobileNavOpen && 'navigation__button_type_mobile'}`}>
           <h3 className="navigation__exit-name">Elise</h3>
-          <div className={`navigation__exit-icon ${ currPath === '/saved-news' && 'navigation__exit-icon_type_black'}`}></div>
+          <div className={`navigation__exit-icon ${ currPath === '/saved-news' && 'navigation__exit-icon_color_black'}`}></div>
         </button> 
       </>:
-        <button className={`navigation__button navigation__button_type_sign-in ${mobileNavOpen && 'navigation__button_type_mobile'}`}>Sign in</button> 
+        <button onClick={onOpenSigningPopup} className={`navigation__button navigation__button_type_sign-in ${mobileNavOpen && 'navigation__button_type_mobile'}`}>Sign in</button> 
       }
     </nav>
   );

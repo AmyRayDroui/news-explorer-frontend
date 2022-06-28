@@ -168,8 +168,8 @@
     background: white;
     border: none;
     padding: 0;
+    cursor: pointer;
 }
-
 
 @media screen and (max-width:550px){   
     .popup__container {

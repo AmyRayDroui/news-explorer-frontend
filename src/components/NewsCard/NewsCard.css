@@ -43,6 +43,7 @@
     background-repeat: no-repeat;
     background-position: center;
     padding: none;
+    cursor: pointer;
 }
 
 .news-card__button-hover-text {
@@ -132,6 +133,7 @@
     font-weight: 700;
     font-size: 16px;
     line-height: 1.25;
+    text-transform: uppercase;
     margin: 0;
 }
 
@@ -184,7 +186,6 @@
     
     .new-card__text {
         min-height: 88px;
-        max-width: 192px;
         -webkit-line-clamp: 4;
         margin-bottom: 12px;
     }

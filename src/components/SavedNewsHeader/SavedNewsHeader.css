@@ -32,7 +32,7 @@
 }
 
 .news-header__keywords {
-    font-weight: 900;
+    font-weight: 700;
 }
 
 @media screen and (max-width:800px){
@@ -41,7 +41,7 @@
     }
 
     .news-header__page-location {
-        margin: 64px 0 16px;
+        margin: 90px 0 16px;
         font-size: 14px;
         line-height: 1.71;
     }
@@ -49,5 +49,19 @@
     .news-header__title {
         font-size: 30px;
         line-height: 1.13;
+    }
+
+    .news-header__keyword-title {
+        margin: 16px 0 32px
+    }
+}
+
+@media screen and (max-width:400px){
+    .news-header__page-location {
+        margin-top: 64px;
+    }
+
+    .news-header__keyword-title {
+        margin-top: 50px;
     }
 }

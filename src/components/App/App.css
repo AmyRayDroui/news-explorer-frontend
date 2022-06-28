@@ -1,3 +1,8 @@
+/*Add default font family*/
+.page {
+  font-family: 'Roboto', 'Ubuntu';
+}
+
 .page__wrapper {
   padding-right: 104px;
   padding-left: 104px;

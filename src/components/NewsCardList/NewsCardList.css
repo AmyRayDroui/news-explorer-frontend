@@ -109,6 +109,10 @@
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 10px;
     }
+
+    .news-list_type_saved {
+        padding: 24px 16px 13px;
+    }
 }
 
 @media screen and (max-width:375px){
