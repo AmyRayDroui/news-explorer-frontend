@@ -1,6 +1,7 @@
 import './App.css';
 import { useState } from 'react';
 import { Routes, Route, useHistory } from 'react-router-dom';
+import getArticles from '../../utils/NewsApi';
 import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
 import Footer from '../Footer/Footer';
