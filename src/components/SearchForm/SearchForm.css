@@ -1,0 +1,136 @@
+.search-form {
+  background-image: url(../../images/search-form_background.jpg);
+  background-size: cover;
+  color: white;
+  padding: 160px 416px 80px;
+}
+
+.search-form__title {
+  font-family: 'Roboto Slab';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 60px;
+  line-height: 1.066;
+  margin: 0;
+}
+
+.search-form__text {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.33;
+  margin: 32px 0 88px;  
+}
+
+.search-form__container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  max-height: 64px;
+  background-color: #fff;
+  border-radius: 100px;
+  font-family: 'Roboto';
+  font-style: normal;
+}
+
+.search-form__input {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 100px;
+  border: none;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.375;
+  padding: 21px 40px 21px 24px; 
+}
+
+.search-form__input:focus{
+  outline: none;
+}
+
+.search-form__button {
+  background-color: #2F71E5;
+  color: inherit;
+  border: none;
+  border-radius: 100px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.33;
+  padding: 20px 56px;
+}
+
+.search-form__button:hover {
+  background-color: #347EFF;
+}
+
+.search-form__button:active {
+  background-color: #2A65CC;
+}
+
+::placeholder {
+  color: #B6BCBF;
+}
+
+
+@media screen and (max-width:1270px){
+  .search-form {
+    padding: 104px 220px 48px;
+  }
+}
+
+@media screen and (max-width:900px){
+  .search-form {
+    max-height: 334px;
+    padding: 104px 163px 48px;
+  }
+
+  .search-form__title {
+      font-size: 36px;
+      line-height: 1.11;
+      margin: 0;
+  }
+
+  .search-form__text {
+      margin: 16px 0 48px;  
+  }
+
+  .search-form__container {
+    max-height: 56px;
+  }
+  
+  .search-form__input {
+    padding: 17px 40px 17px 24px; 
+  }
+  
+  .search-form__button {
+    padding: 16px 52px;
+  }
+}
+
+@media screen and (max-width:650px){
+  .search-form {
+    min-height: 410px;
+    padding: 86px 19px 32px;
+  }
+
+  .search-form__text {
+      margin: 16px 0 122px;  
+  }
+
+  .search-form__container {
+    background-color: transparent;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .search-form__input {
+    padding: 17px 40px 17px 24px; 
+  }
+  
+  .search-form__button {
+    padding: 16px 52px;
+  }
+}
