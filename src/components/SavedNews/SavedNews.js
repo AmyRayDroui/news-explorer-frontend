@@ -2,11 +2,11 @@ import './SavedNews.css';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import NewsCardList from '../NewsCardList/NewsCardList';
 
-function SavedNews() {
+function SavedNews({isCardsSectionVisible, isLoadingCards}) {
     return (
       <main>
           <SavedNewsHeader />
-          <NewsCardList />
+          <NewsCardList isSectionVisible={isCardsSectionVisible} isLoadingCards={isLoadingCards}/>
       </main>
     );
   }

@@ -1,6 +1,7 @@
 import './App.css';
 import { useState } from 'react';
 import { Routes, Route, useHistory } from 'react-router-dom';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import getArticles from '../../utils/NewsApi';
 import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
@@ -11,6 +12,10 @@ import Popup from '../Popup/Popup';
 import Header from '../Header/Header';
 
 function App() {
+  const [currentUser, setCurrentUser] = useState({});
+  const [ receivedArticles, setReceivedArticles] = useState([]);
+  const [isCardsSectionVisible, setIsCardsSectionVisible] = useState(false);
+  const [isLoadingCards, setIsLoadingCards] = useState(false);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [isSigningPopupOpen, setIsSigningPopupOpen] = useState(false);
   const [isSignupPopupOpen, setIsSignupPopupOpen] = useState(false);
@@ -35,24 +40,54 @@ function App() {
     setIsSignupPopupOpen(true);
   }
 
+  async function handleSubmitSearch({keyword}) {
+    setIsCardsSectionVisible(true);
+    setIsLoadingCards(true);
+    try {
+      const articles = await getArticles(keyword);
+      if(articles) {
+        setReceivedArticles(articles.articles);
+        console.log(articles.articles)
+      }
+    } catch(error) {
+
+    }
+    finally {
+      setIsLoadingCards(false);
+    }
+  }
 
   return (
-    <div className="page">
-      <Header 
-        isMobileNavOpen={isMobileNavOpen} 
-        onClosePopups={closeAllPopups} 
-        onOpenMobileNav={handleMobilePopupOpen}
-        onOpenSigningPopup={handleSigningPopupOpen}
-      />
-      <Routes>
-        <Route path='/saved-news' element={<SavedNews/>} />
-        <Route path='/' element={<Main/>} />
-      </Routes>
-      <Footer />
-      <SigningPopup isOpen={isSigningPopupOpen} onClose={closeAllPopups} redirectOnClick={handleSignupPopupOpen}></SigningPopup>
-      <SignupPopup isOpen={isSignupPopupOpen} onClose={closeAllPopups} redirectOnClick={handleSigningPopupOpen}></SignupPopup>
-      <Popup isOpen={isMobileNavOpen} onClose={closeAllPopups} name='navbar' />
-    </div>
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page">
+        <Header 
+          isMobileNavOpen={isMobileNavOpen} 
+          onClosePopups={closeAllPopups} 
+          onOpenMobileNav={handleMobilePopupOpen}
+          onOpenSigningPopup={handleSigningPopupOpen}
+        />
+        <Routes>
+          <Route path='/saved-news' element={
+            <SavedNews 
+              isCardsSectionVisible={true}
+              isLoadingCards={false}
+            />
+          } />
+          <Route path='/' element={
+            <Main 
+              onSubmitSearch={handleSubmitSearch}
+              isCardsSectionVisible={isCardsSectionVisible}
+              isLoadingCards={isLoadingCards}
+              cards={receivedArticles}
+            />
+          } />
+        </Routes>
+        <Footer />
+        <SigningPopup isOpen={isSigningPopupOpen} onClose={closeAllPopups} redirectOnClick={handleSignupPopupOpen}></SigningPopup>
+        <SignupPopup isOpen={isSignupPopupOpen} onClose={closeAllPopups} redirectOnClick={handleSigningPopupOpen}></SignupPopup>
+        <Popup isOpen={isMobileNavOpen} onClose={closeAllPopups} name='navbar' />
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 
