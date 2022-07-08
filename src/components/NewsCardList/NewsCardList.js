@@ -1,14 +1,30 @@
 import './NewsCardList.css';
+import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Preloader from '../Preloader/Preloader';
 import NewsCard from '../NewsCard/NewsCard';
 import { searchResults, savedResults } from '../../utils/temp_storage';
 
 function NewsCardList({isSectionVisible, isLoadingCards, cards}) {
-    const currPath = useLocation().pathname;
-    const found = true;
-    return (
-      <>
+  const [articlesRendering, setArticlesRendering] = useState(3);
+  const [isShowMoreVisible, setIsShowMoreVisible] = useState(true);
+  const currPath = useLocation().pathname;
+  const found = true;
+
+  useEffect(()=> {
+    setArticlesRendering(3);
+    setIsShowMoreVisible(true);
+  }, [cards]);
+
+  function handleShowMoreArticles() {
+    setArticlesRendering(articlesRendering + 3);
+    if(articlesRendering >= cards.length) {
+      setIsShowMoreVisible(false);
+    }
+  }
+
+  return (
+    <>
       { isSectionVisible && 
       <>
         { currPath==='/saved-news' ? 
@@ -30,10 +46,10 @@ function NewsCardList({isSectionVisible, isLoadingCards, cards}) {
                     <h2 className='news-list__title'>Search results</h2>
                     <div className='news-list__container'>
                     {
-                        cards.map((cardElement, index) => <NewsCard key={index} card={cardElement} />)
+                        cards.slice(0, articlesRendering).map((cardElement, index) => <NewsCard key={index} card={cardElement} />)
                     }
                     </div>
-                    <button className='news-list__show-more'>Show more</button>
+                    <button onClick={handleShowMoreArticles} className={`news-list__show-more ${!isShowMoreVisible && 'news-list__show-mor_not-visible'}`}>Show more</button>
                 </>
                 :
                 <>
