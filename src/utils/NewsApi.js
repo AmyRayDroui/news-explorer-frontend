@@ -6,7 +6,6 @@ const getArticles = async(querry) => {
   const currDateList = [currDate.getFullYear(), currDate.getMonth()+1, currDate.getDate()];
   const pastDateList = [pastDate.getFullYear(), pastDate.getMonth()+1, pastDate.getDate()];
   const url = `${newsApiBaseUrl}q=${querry}&from=${pastDateList.join('-')}&to=${currDateList.join('-')}&pageSize=100&apiKey=${NEWS_API_KEY}`;
-  console.log(url);
   const res = await fetch(
     url
   );

@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Routes, Route, useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import getArticles from '../../utils/NewsApi';
@@ -13,9 +13,13 @@ import Header from '../Header/Header';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [ receivedArticles, setReceivedArticles] = useState([]);
+  const [searchKeyword, setSearchKeyword] = useState('');
   const [isCardsSectionVisible, setIsCardsSectionVisible] = useState(false);
   const [isLoadingCards, setIsLoadingCards] = useState(false);
+  const [isFoundCards, setIsFoundCards] = useState(false);
+  const [isErrorSearchOccur, setIsErrorSearchOccur] = useState(false);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [isSigningPopupOpen, setIsSigningPopupOpen] = useState(false);
   const [isSignupPopupOpen, setIsSignupPopupOpen] = useState(false);
@@ -45,12 +49,16 @@ function App() {
     setIsLoadingCards(true);
     try {
       const articles = await getArticles(keyword);
-      if(articles) {
+      setIsErrorSearchOccur(false);
+      if(articles.articles.length) {
+        setSearchKeyword(keyword);
+        setIsFoundCards(true);
         setReceivedArticles(articles.articles);
-        console.log(articles.articles)
+      } else {
+        setIsFoundCards(false);
       }
     } catch(error) {
-
+      setIsErrorSearchOccur(true);
     }
     finally {
       setIsLoadingCards(false);
@@ -69,6 +77,7 @@ function App() {
         <Routes>
           <Route path='/saved-news' element={
             <SavedNews 
+              isLoggedIn={isLoggedIn}
               isCardsSectionVisible={true}
               isLoadingCards={false}
             />
@@ -76,9 +85,13 @@ function App() {
           <Route path='/' element={
             <Main 
               onSubmitSearch={handleSubmitSearch}
+              isLoggedIn={isLoggedIn}
               isCardsSectionVisible={isCardsSectionVisible}
               isLoadingCards={isLoadingCards}
-              cards={receivedArticles}
+              isFoundCards={isFoundCards}
+              isErrorSearchOccur={isErrorSearchOccur}
+              articles={receivedArticles}
+              keyword={searchKeyword}
             />
           } />
         </Routes>

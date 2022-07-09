@@ -4,11 +4,19 @@ import About from '../About/About';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import SearchForm from '../SearchForm/SearchForm';
 
-function Main({onSubmitSearch, isCardsSectionVisible, isLoadingCards, cards}) {
+function Main({isLoggedIn, onSubmitSearch, isCardsSectionVisible, isLoadingCards, isFoundCards, isErrorSearchOccur, articles, keyword}) {
     return (
       <main className="main">
         <SearchForm onSubmit={onSubmitSearch}/>
-        <NewsCardList isSectionVisible={isCardsSectionVisible} isLoadingCards={isLoadingCards} cards={cards}/>
+        <NewsCardList 
+          isLoggedIn={isLoggedIn}
+          isSectionVisible={isCardsSectionVisible} 
+          isLoadingCards={isLoadingCards} 
+          isFoundCards={isFoundCards} 
+          isErrorOccur={isErrorSearchOccur}
+          articles={articles}
+          keyword={keyword}
+        />
         <About />
       </main>
     );
