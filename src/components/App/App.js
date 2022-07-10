@@ -2,6 +2,7 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import { Routes, Route, useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import mainApi from '../../utils/MainApi';
 import getArticles from '../../utils/NewsApi';
 import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
@@ -64,6 +65,12 @@ function App() {
       setIsLoadingCards(false);
     }
   }
+  
+  function handleSaveArticle({card}) {
+    mainApi.addNewArticle(card);
+  }
+
+
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -80,11 +87,13 @@ function App() {
               isLoggedIn={isLoggedIn}
               isCardsSectionVisible={true}
               isLoadingCards={false}
+              onSaveArticle={handleSaveArticle}
             />
           } />
           <Route path='/' element={
             <Main 
               onSubmitSearch={handleSubmitSearch}
+              onSaveArticle={handleSaveArticle}
               isLoggedIn={isLoggedIn}
               isCardsSectionVisible={isCardsSectionVisible}
               isLoadingCards={isLoadingCards}
