@@ -1,13 +1,35 @@
 import './NewsCard.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-function NewsCard({ card, onSaveArticle, isLoggedIn, keyword }) {
+function NewsCard({ card, onSaveArticle, isLoggedIn, keyword, savedArticles}) {
     const currPath = useLocation().pathname;
-    const [ isSaved, setIsSaved] = useState(false);
-
+    const [isSaved, setIsSaved] = useState(false);
     const date = new Date(card.publishedAt);
     const dateString = `${date.toLocaleString('default', {month: 'long'})} ${date.getDate()}, ${date.getFullYear()}`
+    const articleObj = {
+      keyword: keyword,
+      title: card.title,
+      text: card.description,
+      date: dateString,
+      source: card.source.name,
+      link: card.url,
+      image: card.urlToImage
+    }
+
+    useEffect(() => {
+      if(currPath==='/saved-news') {
+        setIsSaved(true);
+      } else {
+        savedArticles.forEach(article => {
+          if( article.url === articleObj.link) {
+            setIsSaved(true);
+          }
+        });
+      }
+    }, []);
+
+    
 
     function handleButtonClick() {
       if(isLoggedIn) {
@@ -15,15 +37,6 @@ function NewsCard({ card, onSaveArticle, isLoggedIn, keyword }) {
           //onDeleteArticle()
           setIsSaved(false);
         } else {
-          const articleObj = {
-            keyword: keyword,
-            title: card.title,
-            text: card.description,
-            date: dateString,
-            source: card.source.name,
-            link: card.url,
-            image: card.urlToImage
-          }
           onSaveArticle({articleObj});
         }
       }

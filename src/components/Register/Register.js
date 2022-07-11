@@ -1,7 +1,7 @@
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 import { useState } from 'react';
 
-function SignupPopup({onClose, isOpen, redirectOnClick}) {
+function Register({onClose, isOpen, redirectOnClick}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
@@ -33,4 +33,4 @@ function SignupPopup({onClose, isOpen, redirectOnClick}) {
     );
   }
   
-  export default SignupPopup;
+  export default Register;

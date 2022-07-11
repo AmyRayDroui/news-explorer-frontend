@@ -7,15 +7,16 @@ import getArticles from '../../utils/NewsApi';
 import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
 import Footer from '../Footer/Footer';
-import SigningPopup from '../SigningPopup/SigningPopup';
-import SignupPopup from '../SignupPopup/SignupPopup';
+import SigningPopup from '../Login/Login';
+import Register from '../Register/Register';
 import Popup from '../Popup/Popup';
 import Header from '../Header/Header';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [ receivedArticles, setReceivedArticles] = useState([]);
+  const [receivedArticles, setReceivedArticles] = useState([]);
+  const [savedArticles, setSavedArticles] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState('');
   const [isCardsSectionVisible, setIsCardsSectionVisible] = useState(false);
   const [isLoadingCards, setIsLoadingCards] = useState(false);
@@ -24,6 +25,10 @@ function App() {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [isSigningPopupOpen, setIsSigningPopupOpen] = useState(false);
   const [isSignupPopupOpen, setIsSignupPopupOpen] = useState(false);
+
+
+
+
 
   function closeAllPopups() {
     setIsMobileNavOpen(false);
@@ -68,6 +73,7 @@ function App() {
   
   function handleSaveArticle({card}) {
     mainApi.addNewArticle(card);
+
   }
 
 
@@ -75,7 +81,8 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header 
+        <Header
+          isLoggedIn={isLoggedIn}
           isMobileNavOpen={isMobileNavOpen} 
           onClosePopups={closeAllPopups} 
           onOpenMobileNav={handleMobilePopupOpen}
@@ -87,6 +94,7 @@ function App() {
               isLoggedIn={isLoggedIn}
               isCardsSectionVisible={true}
               isLoadingCards={false}
+              savedArticles={savedArticles}
               onSaveArticle={handleSaveArticle}
             />
           } />
@@ -95,6 +103,7 @@ function App() {
               onSubmitSearch={handleSubmitSearch}
               onSaveArticle={handleSaveArticle}
               isLoggedIn={isLoggedIn}
+              savedArticles={savedArticles}
               isCardsSectionVisible={isCardsSectionVisible}
               isLoadingCards={isLoadingCards}
               isFoundCards={isFoundCards}
@@ -106,7 +115,7 @@ function App() {
         </Routes>
         <Footer />
         <SigningPopup isOpen={isSigningPopupOpen} onClose={closeAllPopups} redirectOnClick={handleSignupPopupOpen}></SigningPopup>
-        <SignupPopup isOpen={isSignupPopupOpen} onClose={closeAllPopups} redirectOnClick={handleSigningPopupOpen}></SignupPopup>
+        <Register isOpen={isSignupPopupOpen} onClose={closeAllPopups} redirectOnClick={handleSigningPopupOpen}></Register>
         <Popup isOpen={isMobileNavOpen} onClose={closeAllPopups} name='navbar' />
       </div>
     </CurrentUserContext.Provider>
