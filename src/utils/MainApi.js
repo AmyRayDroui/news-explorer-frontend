@@ -18,11 +18,11 @@ class Api {
         }
     }
 
-    signup( password, email ) {
+    signup( password, email, name ) {
         return fetch(`${this._baseUrl}/signup`, {
           method: "POST",
           headers: this._headers,
-          body: JSON.stringify({ password, email }),
+          body: JSON.stringify({ password, email, name }),
         })
           .then(res => this._checkResponse(res));
     }; 

@@ -1,7 +1,7 @@
 import './PopupWithForm.css';
 import Popup from '../Popup/Popup';
 
-function PopupWithForm({children, isOpen, onClose, onSubmit, validInput, name, title, redirectText, redirectOnClick, popupGeneralErrorMessage}) {
+function PopupWithForm({children, isOpen, onClose, onSubmit, isValid, name, title, redirectText, redirectOnClick, globalError}) {
     return (
       <Popup isOpen={isOpen} name={name}>
         <div className="popup__container">
@@ -9,8 +9,8 @@ function PopupWithForm({children, isOpen, onClose, onSubmit, validInput, name, t
           <h2 className="popup__title">{title}</h2>
           <form onSubmit={onSubmit} className="popup__form" name={name}>
             {children}
-            <p className="popup__error popup__general-error-message">{popupGeneralErrorMessage}</p>
-            <button type="submit" disabled={!validInput} className="popup__submit-button" aria-label="Submit">{title}</button>
+            <p className="popup__error popup__general-error-message">{globalError}</p>
+            <button type="submit" disabled={!isValid} className="popup__submit-button" aria-label="Submit">{title}</button>
           </form>
           <div className="popup__redirect">
             <p className="popup__redirect-text">or</p>

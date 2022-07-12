@@ -7,7 +7,7 @@ import getArticles from '../../utils/NewsApi';
 import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
 import Footer from '../Footer/Footer';
-import SigningPopup from '../Login/Login';
+import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Popup from '../Popup/Popup';
 import Header from '../Header/Header';
@@ -25,6 +25,11 @@ function App() {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [isSigningPopupOpen, setIsSigningPopupOpen] = useState(false);
   const [isSignupPopupOpen, setIsSignupPopupOpen] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [globalError, setGlobalError] = useState('');
+
 
 
 
@@ -76,7 +81,26 @@ function App() {
 
   }
 
+  async function handleRegister(e) {
+    e.preventDefault();
+    try {
+      const res = await mainApi.signup(email, password, name);
 
+      if(res) {
+        console.log("why")
+        setGlobalError('');
+        setIsSignupPopupOpen(false);
+        setIsSigningPopupOpen(true);
+        setEmail('');
+        setPassword('');
+        setName('');
+        return;
+      }
+    } catch(err) {
+      console.log("error")
+      setGlobalError("ERROR");
+    }
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -114,8 +138,24 @@ function App() {
           } />
         </Routes>
         <Footer />
-        <SigningPopup isOpen={isSigningPopupOpen} onClose={closeAllPopups} redirectOnClick={handleSignupPopupOpen}></SigningPopup>
-        <Register isOpen={isSignupPopupOpen} onClose={closeAllPopups} redirectOnClick={handleSigningPopupOpen}></Register>
+        <Login 
+          isOpen={isSigningPopupOpen} 
+          onClose={closeAllPopups} 
+          redirectOnClick={handleSignupPopupOpen} 
+          setEmail={setEmail}
+          setPassword={setPassword}
+          globalError={globalError}
+        />
+        <Register 
+          onsSubmit={handleRegister}
+          isOpen={isSignupPopupOpen} 
+          onClose={closeAllPopups} 
+          redirectOnClick={handleSigningPopupOpen}
+          setEmail={setEmail}
+          setPassword={setPassword}
+          setName={setName}
+          globalError={globalError}
+        />
         <Popup isOpen={isMobileNavOpen} onClose={closeAllPopups} name='navbar' />
       </div>
     </CurrentUserContext.Provider>
