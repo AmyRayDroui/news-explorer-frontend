@@ -4,6 +4,7 @@ import { Routes, Route, useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import mainApi from '../../utils/MainApi';
 import getArticles from '../../utils/NewsApi';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
 import Footer from '../Footer/Footer';
@@ -13,7 +14,12 @@ import Popup from '../Popup/Popup';
 import Header from '../Header/Header';
 
 function App() {
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState({
+    name: '',
+    email: '',
+    password: '',
+    _id: ''
+  });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [receivedArticles, setReceivedArticles] = useState([]);
   const [savedArticles, setSavedArticles] = useState([]);
@@ -29,9 +35,6 @@ function App() {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [globalError, setGlobalError] = useState('');
-
-
-
 
 
 
@@ -85,9 +88,7 @@ function App() {
     e.preventDefault();
     try {
       const res = await mainApi.signup(email, password, name);
-
       if(res) {
-        console.log("why")
         setGlobalError('');
         setIsSignupPopupOpen(false);
         setIsSigningPopupOpen(true);
@@ -97,8 +98,29 @@ function App() {
         return;
       }
     } catch(err) {
-      console.log("error")
-      setGlobalError("ERROR");
+      setGlobalError(err);
+    }
+  }
+
+  async function handleLogin(e) {
+    e.preventDefault();
+    try {
+      const res = await mainApi.signin(email, password, name);
+      if(res.token) {
+        localStorage.setItem('jwt', res.token);
+        mainApi.setHeader(localStorage.jwt);
+      }
+      const userInfo = await mainApi.getUserInfo();
+      setCurrentUser({
+        name: userInfo.name,
+        email: userInfo.email,
+        password: userInfo.password,
+        _id: userInfo._id
+      });
+      setIsLoggedIn(true);
+      setIsSigningPopupOpen(false);
+    } catch(err) {
+      setGlobalError(err);
     }
   }
 
@@ -114,13 +136,14 @@ function App() {
         />
         <Routes>
           <Route path='/saved-news' element={
-            <SavedNews 
+            <ProtectedRoute 
               isLoggedIn={isLoggedIn}
+              element={SavedNews}>
               isCardsSectionVisible={true}
               isLoadingCards={false}
               savedArticles={savedArticles}
               onSaveArticle={handleSaveArticle}
-            />
+            </ProtectedRoute>
           } />
           <Route path='/' element={
             <Main 
@@ -139,6 +162,7 @@ function App() {
         </Routes>
         <Footer />
         <Login 
+          onSubmit={handleLogin}
           isOpen={isSigningPopupOpen} 
           onClose={closeAllPopups} 
           redirectOnClick={handleSignupPopupOpen} 
@@ -147,7 +171,7 @@ function App() {
           globalError={globalError}
         />
         <Register 
-          onsSubmit={handleRegister}
+          onSubmit={handleRegister}
           isOpen={isSignupPopupOpen} 
           onClose={closeAllPopups} 
           redirectOnClick={handleSigningPopupOpen}

@@ -1,7 +1,7 @@
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 import useForm from '../../utils/useForm';
 
-function Login({onClose, isOpen, redirectOnClick, setEmail, setPassword, globalError}) {
+function Login({onSubmit, onClose, isOpen, redirectOnClick, setEmail, setPassword, globalError}) {
   const { values, handleChange, errors, isValid, resetForm } = useForm();
 
     function handleEmailChange(e) {
@@ -16,7 +16,7 @@ function Login({onClose, isOpen, redirectOnClick, setEmail, setPassword, globalE
 
 
     return (
-    <PopupWithForm isOpen={isOpen} onClose={onClose} onSubmit={null} resetForm={resetForm} isValid={isValid} name="signin" title="Sign in" redirectText="Sign up" redirectOnClick={redirectOnClick} globalError={globalError}>
+    <PopupWithForm isOpen={isOpen} onClose={onClose} onSubmit={onSubmit} resetForm={resetForm} isValid={isValid} name="signin" title="Sign in" redirectText="Sign up" redirectOnClick={redirectOnClick} globalError={globalError}>
         <h4 className="popup__input-title">Email</h4>
         <input type="email" value={values.email || ''} name="email" onChange={handleEmailChange} className="popup__input popup__input_type_email" id="signin-email-input" placeholder="Enter email" required minLength="5" maxLength="40"/>
         <span className="popup__error name-input-error">{errors.email ? errors.email : ''}</span>

@@ -18,7 +18,7 @@ class Api {
         }
     }
 
-    signup( password, email, name ) {
+    signup( email, password, name ) {
         return fetch(`${this._baseUrl}/signup`, {
           method: "POST",
           headers: this._headers,
@@ -27,7 +27,7 @@ class Api {
           .then(res => this._checkResponse(res));
     }; 
 
-    signin( password, email ) {
+    signin( email, password ) {
         return fetch(`${this._baseUrl}/signin`, {
             method: "POST",
             headers: this._headers,
@@ -80,7 +80,7 @@ class Api {
   }
   
   const mainApi = new Api({
-    baseUrl: "api.amyexplorer.students.nomoreparties.sbs",
+    baseUrl: "http://localhost:3001",//"https://api.amyexplorer.students.nomoreparties.sbs",
     headers: {
       "Content-Type": "application/json",
       "Authorization": ''
