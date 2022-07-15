@@ -11,6 +11,7 @@ import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Popup from '../Popup/Popup';
+import RegisteredSuccessPopup from '../RegisteredSuccessPopup/RegisteredSuccessPopup';
 import Header from '../Header/Header';
 
 function App() {
@@ -31,17 +32,34 @@ function App() {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [isSigningPopupOpen, setIsSigningPopupOpen] = useState(false);
   const [isSignupPopupOpen, setIsSignupPopupOpen] = useState(false);
+  const [isRegisteredSuccessPopupOpen, setIsRegisteredSuccessPopupOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [globalError, setGlobalError] = useState('');
 
-
+  useEffect(() => {
+    (async function() {
+      if (localStorage.jwt) {
+        mainApi.setHeader(localStorage.jwt);
+        setIsLoggedIn(true);
+        const userInfo = await mainApi.getUserInfo();
+        setCurrentUser({
+          name: userInfo.name,
+          email: userInfo.email,
+          password: userInfo.password,
+          _id: userInfo._id
+        });
+      }
+    })();
+  }, []);
 
   function closeAllPopups() {
     setIsMobileNavOpen(false);
     setIsSigningPopupOpen(false);
     setIsSignupPopupOpen(false);
+    setIsRegisteredSuccessPopupOpen(false);
+    setGlobalError('');
   }
 
   function handleMobilePopupOpen() {
@@ -55,7 +73,13 @@ function App() {
 
   function handleSignupPopupOpen() {
     closeAllPopups();
+    setIsRegisteredSuccessPopupOpen(false);
     setIsSignupPopupOpen(true);
+  }
+
+  function handleRegisteredSuccessPopupOpen() {
+    closeAllPopups();
+    setIsRegisteredSuccessPopupOpen(true);
   }
 
   async function handleSubmitSearch({keyword}) {
@@ -89,9 +113,7 @@ function App() {
     try {
       const res = await mainApi.signup(email, password, name);
       if(res) {
-        setGlobalError('');
-        setIsSignupPopupOpen(false);
-        setIsSigningPopupOpen(true);
+        setIsRegisteredSuccessPopupOpen(true);
         setEmail('');
         setPassword('');
         setName('');
@@ -124,6 +146,18 @@ function App() {
     }
   }
 
+  function handleLogout() {
+    localStorage.removeItem('jwt');
+    mainApi.setHeader('')
+    setIsLoggedIn(false);
+    setCurrentUser({
+      name: '',
+      email: '',
+      password: '',
+      _id: ''
+    });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -133,10 +167,11 @@ function App() {
           onClosePopups={closeAllPopups} 
           onOpenMobileNav={handleMobilePopupOpen}
           onOpenSigningPopup={handleSigningPopupOpen}
+          onLogout={handleLogout}
         />
         <Routes>
           <Route path='/saved-news' element={
-            <ProtectedRoute 
+            <ProtectedRoute
               isLoggedIn={isLoggedIn}
               element={SavedNews}>
               isCardsSectionVisible={true}
@@ -170,6 +205,7 @@ function App() {
           setPassword={setPassword}
           globalError={globalError}
         />
+        { !isRegisteredSuccessPopupOpen? 
         <Register 
           onSubmit={handleRegister}
           isOpen={isSignupPopupOpen} 
@@ -179,7 +215,13 @@ function App() {
           setPassword={setPassword}
           setName={setName}
           globalError={globalError}
+        />:
+        <RegisteredSuccessPopup 
+          isOpen={isRegisteredSuccessPopupOpen}
+          redirectOnClick={handleSigningPopupOpen}
+          onClose={closeAllPopups} 
         />
+        }
         <Popup isOpen={isMobileNavOpen} onClose={closeAllPopups} name='navbar' />
       </div>
     </CurrentUserContext.Provider>

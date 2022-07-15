@@ -1,7 +1,7 @@
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 import useForm from '../../utils/useForm';
 
-function Register({onSubmit, onClose, isOpen, redirectOnClick, setEmail, setPassword, setName, globalError}) {
+function Register({onSubmit, onClose, isOpen, redirectOnClick, setEmail, setPassword, setName, globalError, isRegistrationSuccessful}) {
     const { values, handleChange, errors, isValid, resetForm } = useForm();
 
     function handleEmailChange(e) {
