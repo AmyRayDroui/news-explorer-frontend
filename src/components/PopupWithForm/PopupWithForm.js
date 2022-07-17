@@ -3,7 +3,7 @@ import Popup from '../Popup/Popup';
 
 function PopupWithForm({children, isOpen, onClose, onSubmit, isValid, name, title, redirectText, redirectOnClick, globalError}) {
     return (
-      <Popup isOpen={isOpen} name={name}>
+      <Popup isOpen={isOpen} onClose={onClose} name={name}>
         <div className="popup__container">
           <button type="button" className="popup__close-button" onClick={onClose} aria-label="Close popup" />
           <h2 className="popup__title">{title}</h2>

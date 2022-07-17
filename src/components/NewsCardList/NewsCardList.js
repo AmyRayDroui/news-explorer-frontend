@@ -5,7 +5,7 @@ import Preloader from '../Preloader/Preloader';
 import NewsCard from '../NewsCard/NewsCard';
 import { searchResults, savedResults } from '../../utils/temp_storage';
 
-function NewsCardList({isLoggedIn, isSectionVisible, isLoadingCards, isFoundCards, isErrorOccur, articles, savedArticles, keyword, onSaveArticle, onDeleteArticle}) {
+function NewsCardList({isLoggedIn, isSectionVisible, isLoadingCards, isFoundCards, isErrorOccur, articles, savedArticles, keyword, onSaveArticle, onDeleteArticle, onOpenSigningPopup}) {
   const [articlesRendering, setArticlesRendering] = useState(3);
   const [isShowMoreVisible, setIsShowMoreVisible] = useState(true);
   const currPath = useLocation().pathname;
@@ -47,7 +47,7 @@ function NewsCardList({isLoggedIn, isSectionVisible, isLoadingCards, isFoundCard
                       <h2 className='news-list__title'>Search results</h2>
                       <div className='news-list__container'>
                       {
-                          articles.slice(0, articlesRendering).map((cardElement, index) => <NewsCard key={index} card={cardElement} isLoggedIn={isLoggedIn} keyword={keyword} savedArticles={savedArticles} onSaveArticle={onSaveArticle} onDeleteArticle={onDeleteArticle}/>)
+                          articles.slice(0, articlesRendering).map((cardElement, index) => <NewsCard key={index} card={cardElement} isLoggedIn={isLoggedIn} keyword={keyword} savedArticles={savedArticles} onSaveArticle={onSaveArticle} onDeleteArticle={onDeleteArticle} onOpenSigningPopup={onOpenSigningPopup}/>)
                       }
                       </div>
                       <button onClick={handleShowMoreArticles} className={`news-list__show-more ${!isShowMoreVisible && 'news-list__show-mor_not-visible'}`}>Show more</button>

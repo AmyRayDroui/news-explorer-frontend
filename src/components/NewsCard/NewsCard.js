@@ -2,7 +2,7 @@ import './NewsCard.css';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-function NewsCard({ card, onSaveArticle, onDeleteArticle, isLoggedIn, keyword, savedArticles}) {
+function NewsCard({ card, onSaveArticle, onDeleteArticle, isLoggedIn, keyword, savedArticles, onOpenSigningPopup}) {
     const currPath = useLocation().pathname;
     const [isSaved, setIsSaved] = useState(false);
     const [cardId, setCardId] = useState('');
@@ -66,19 +66,29 @@ function NewsCard({ card, onSaveArticle, onDeleteArticle, isLoggedIn, keyword, s
       if(isLoggedIn) {
         if(isSaved) {
           if(cardId) {
+            try {
             const res = await onDeleteArticle(cardId);
             if(res) {
               setCardId('');
               setIsSaved(false);
             }
+            } catch(err) {
+              alert("An Error had Occurred while trying to remove an article");
+            }
           }
         } else {
-          const res = await onSaveArticle(articleObj);
-          if(res) {
-            setCardId(res._id);
-            setIsSaved(true);
+          try {
+            const res = await onSaveArticle(articleObj);
+            if(res) {
+              setCardId(res._id);
+              setIsSaved(true);
+            }
+          } catch(err) {
+            alert("An Error had Occurred while trying to add an article");
           }
         }
+      } else {
+        onOpenSigningPopup();
       }
     }
 
@@ -93,7 +103,7 @@ function NewsCard({ card, onSaveArticle, onDeleteArticle, isLoggedIn, keyword, s
             <p className="news-card__bubble news-card__button-hover-text">Remove from saved</p>
         </>:
         <>
-            <button type="button" onClick={handleButtonClick} disabled={!isLoggedIn} className={`news-card__bubble news-card__button news-card__button_type_save ${isSaved && 'news-card__button_type_saved'}`}></button>
+            <button type="button" onClick={handleButtonClick} className={`news-card__bubble news-card__button news-card__button_type_save ${isSaved && 'news-card__button_type_saved'}`}></button>
             { !isLoggedIn && <p className="news-card__bubble news-card__button-hover-text">Sign in to save articles</p>}
         </>
         }

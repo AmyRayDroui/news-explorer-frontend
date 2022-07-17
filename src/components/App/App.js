@@ -40,16 +40,20 @@ function App() {
 
   useEffect(() => {
     (async function() {
-      if (localStorage.jwt) {
-        mainApi.setHeader(localStorage.jwt);
-        setIsLoggedIn(true);
-        const userInfo = await mainApi.getUserInfo();
-        setCurrentUser({
-          name: userInfo.name,
-          email: userInfo.email,
-          password: userInfo.password,
-          _id: userInfo._id
+      try {
+        if (localStorage.jwt) {
+          mainApi.setHeader(localStorage.jwt);
+          setIsLoggedIn(true);
+          const userInfo = await mainApi.getUserInfo();
+          setCurrentUser({
+            name: userInfo.name,
+            email: userInfo.email,
+            password: userInfo.password,
+            _id: userInfo._id
         });
+        }
+      } catch(err) {
+        alert("An Error had Occurred while trying to automatically login");
       }
     })();
   }, []);
@@ -57,9 +61,13 @@ function App() {
   useEffect(() => {
     if(!isLoggedIn) return;
     (async function() {
-      const articles = await mainApi.getUserArticles();
-      if(articles) {
-        setSavedArticles(articles);
+      try {
+        const articles = await mainApi.getUserArticles();
+        if(articles) {
+          setSavedArticles(articles);
+        }
+      } catch(err) {
+        alert("An Error had Occurred while trying to receive saved article");
       }
     })();
   }, [isLoggedIn]);
@@ -211,6 +219,7 @@ function App() {
               onSubmitSearch={handleSubmitSearch}
               onSaveArticle={handleSaveArticle}
               onDeleteArticle={handleDeleteArticle}
+              onOpenSigningPopup={handleSigningPopupOpen}
               isLoggedIn={isLoggedIn}
               savedArticles={savedArticles}
               isCardsSectionVisible={isCardsSectionVisible}
