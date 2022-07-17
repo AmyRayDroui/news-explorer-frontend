@@ -139,8 +139,6 @@ function App() {
       if(res) {
         setIsRegisteredSuccessPopupOpen(true);
         setIsSignupPopupOpen(false);
-        setEmail('');
-        setPassword('');
         setName('');
         return;
       }
@@ -152,7 +150,7 @@ function App() {
   async function handleLogin(e) {
     e.preventDefault();
     try {
-      const res = await mainApi.signin(email, password, name);
+      const res = await mainApi.signin(email, password);
       if(res.token) {
         localStorage.setItem('jwt', res.token);
         mainApi.setHeader(localStorage.jwt);
@@ -166,6 +164,8 @@ function App() {
       });
       setIsLoggedIn(true);
       setIsSigningPopupOpen(false);
+      setEmail('');
+      setPassword('');
     } catch(err) {
       setGlobalError(err);
     }

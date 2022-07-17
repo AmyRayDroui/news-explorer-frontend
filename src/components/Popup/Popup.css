@@ -133,6 +133,7 @@
 }
 
 .popup__error {
+    min-height: 14px;
     color: red;
     font-size: 12px;
     line-height: 1.2;
