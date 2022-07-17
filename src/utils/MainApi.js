@@ -65,14 +65,19 @@ class Api {
         method: 'POST',
         headers: this._headers,
         body: JSON.stringify({
-          name: data.name,
-          link: data.link
+          keyword: data.keyword,
+          title: data.title,
+          text: data.text,
+          date: data.date,
+          source: data.source,
+          link: data.link,
+          image: data.image
         })
       }).then(res => this._checkResponse(res));
     }
   
     removeArticle(cardId) {
-      return fetch(`${this._baseUrl}/cards/${cardId}`, {
+      return fetch(`${this._baseUrl}/articles/${cardId}`, {
         method: 'DELETE',
         headers: this._headers
       }).then(res => this._checkResponse(res));

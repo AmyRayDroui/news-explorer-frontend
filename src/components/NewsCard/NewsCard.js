@@ -2,42 +2,80 @@ import './NewsCard.css';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-function NewsCard({ card, onSaveArticle, isLoggedIn, keyword, savedArticles}) {
+function NewsCard({ card, onSaveArticle, onDeleteArticle, isLoggedIn, keyword, savedArticles}) {
     const currPath = useLocation().pathname;
     const [isSaved, setIsSaved] = useState(false);
+    const [cardId, setCardId] = useState('');
     const date = new Date(card.publishedAt);
     const dateString = `${date.toLocaleString('default', {month: 'long'})} ${date.getDate()}, ${date.getFullYear()}`
-    const articleObj = {
-      keyword: keyword,
-      title: card.title,
-      text: card.description,
-      date: dateString,
-      source: card.source.name,
-      link: card.url,
-      image: card.urlToImage
+    let articleObj = {
+      keyword: '',
+      title: '',
+      text: '',
+      date: '',
+      source: '',
+      link: '',
+      image: ''
+    }
+    if(currPath==='/saved-news') {
+      articleObj = {
+        keyword: card.keyword,
+        title: card.title,
+        text: card.text,
+        date: card.date,
+        source: card.source,
+        link: card.link,
+        image: card.image
+      }
+    } else {
+      articleObj = {
+        keyword: keyword,
+        title: card.title,
+        text: card.description,
+        date: dateString,
+        source: card.source.name,
+        link: card.url,
+        image: card.urlToImage
+      }
     }
 
     useEffect(() => {
+      if(!isLoggedIn) {
+        setIsSaved(false);
+        return
+      }
       if(currPath==='/saved-news') {
         setIsSaved(true);
+        setCardId(card._id);
       } else {
         savedArticles.forEach(article => {
-          if( article.url === articleObj.link) {
+          if( article.link === articleObj.link) {
+            
+            setCardId(article._id);
             setIsSaved(true);
           }
         });
       }
-    }, []);
+    }, [isLoggedIn, savedArticles]);
 
     
 
-    function handleButtonClick() {
+    async function handleButtonClick() {
       if(isLoggedIn) {
         if(isSaved) {
-          //onDeleteArticle()
-          setIsSaved(false);
+          if(cardId) {
+            const res = await onDeleteArticle(cardId);
+            if(res) {
+              setCardId('');
+              setIsSaved(false);
+            }
+          }
         } else {
-          onSaveArticle({articleObj});
+          const res = await onSaveArticle(articleObj);
+          if(res) {
+            setCardId(res._id);
+            setIsSaved(true);
+          }
         }
       }
     }
@@ -45,23 +83,23 @@ function NewsCard({ card, onSaveArticle, isLoggedIn, keyword, savedArticles}) {
 
     return (
       <div className="news-card">
-        <div className="news-card__image" style={{ backgroundImage: `url(${card.urlToImage})` }}></div>
+        <div className="news-card__image" style={{ backgroundImage: `url(${articleObj.image})` }}></div>
         { currPath==='/saved-news' ? 
         <>    
-            <h4 className="news-card__bubble news-card__keyword">{keyword}</h4> 
+            <h4 className="news-card__bubble news-card__keyword">{articleObj.keyword}</h4> 
             <button type="button" className="news-card__bubble news-card__button news-card__button_type_remove"></button>
             <p className="news-card__bubble news-card__button-hover-text">Remove from saved</p>
         </>:
         <>
-            <button type="button" onClick={handleButtonClick} className={`news-card__bubble news-card__button news-card__button_type_save ${isSaved && 'news-card__button_type_saved'}`}></button>
+            <button type="button" onClick={handleButtonClick} disabled={!isLoggedIn} className={`news-card__bubble news-card__button news-card__button_type_save ${isSaved && 'news-card__button_type_saved'}`}></button>
             { !isLoggedIn && <p className="news-card__bubble news-card__button-hover-text">Sign in to save articles</p>}
         </>
         }
         <div className="new-card__text-container">
-            <p className="new-card__date">{dateString}</p>
-            <h3 className="new-card__title">{card.title}</h3>
-            <p className="new-card__text">{card.description}</p>
-            <p className="new-card__source">{card.source.name}</p>
+            <p className="new-card__date">{articleObj.date}</p>
+            <h3 className="new-card__title">{articleObj.title}</h3>
+            <p className="new-card__text">{articleObj.text}</p>
+            <p className="new-card__source">{articleObj.source}</p>
         </div>
       </div>
     );

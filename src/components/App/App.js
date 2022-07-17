@@ -54,6 +54,16 @@ function App() {
     })();
   }, []);
 
+  useEffect(() => {
+    if(!isLoggedIn) return;
+    (async function() {
+      const articles = await mainApi.getUserArticles();
+      if(articles) {
+        setSavedArticles(articles);
+      }
+    })();
+  }, [isLoggedIn]);
+
   function closeAllPopups() {
     setIsMobileNavOpen(false);
     setIsSigningPopupOpen(false);
@@ -77,11 +87,6 @@ function App() {
     setIsSignupPopupOpen(true);
   }
 
-  function handleRegisteredSuccessPopupOpen() {
-    closeAllPopups();
-    setIsRegisteredSuccessPopupOpen(true);
-  }
-
   async function handleSubmitSearch({keyword}) {
     setIsCardsSectionVisible(true);
     setIsLoadingCards(true);
@@ -103,9 +108,12 @@ function App() {
     }
   }
   
-  function handleSaveArticle({card}) {
-    mainApi.addNewArticle(card);
+  async function handleSaveArticle(card) {
+    return await mainApi.addNewArticle(card);
+  }
 
+  async function handleDeleteArticle(cardId) {
+    return await mainApi.removeArticle(cardId);
   }
 
   async function handleRegister(e) {
@@ -114,6 +122,7 @@ function App() {
       const res = await mainApi.signup(email, password, name);
       if(res) {
         setIsRegisteredSuccessPopupOpen(true);
+        setIsSignupPopupOpen(false);
         setEmail('');
         setPassword('');
         setName('');
@@ -173,17 +182,19 @@ function App() {
           <Route path='/saved-news' element={
             <ProtectedRoute
               isLoggedIn={isLoggedIn}
-              element={SavedNews}>
+              element={SavedNews}
               isCardsSectionVisible={true}
               isLoadingCards={false}
               savedArticles={savedArticles}
-              onSaveArticle={handleSaveArticle}
-            </ProtectedRoute>
+              onSaveArticle={handleSaveArticle} 
+              onDeleteArticle={handleDeleteArticle}
+            />
           } />
           <Route path='/' element={
             <Main 
               onSubmitSearch={handleSubmitSearch}
               onSaveArticle={handleSaveArticle}
+              onDeleteArticle={handleDeleteArticle}
               isLoggedIn={isLoggedIn}
               savedArticles={savedArticles}
               isCardsSectionVisible={isCardsSectionVisible}

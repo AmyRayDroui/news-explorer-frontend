@@ -78,6 +78,10 @@
     background-image: url('../../images/icons/marked-bookmark-icon.svg');
 }
 
+.news-card__button_type_saved:hover {
+    background-image: url('../../images/icons/marked-bookmark-icon.svg');
+}
+
 .news-card__button_type_remove {
     background-image: url('../../images/icons/grey-bin-icon.svg');
 }
