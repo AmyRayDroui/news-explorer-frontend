@@ -1,9 +1,14 @@
 import './SearchForm.css';
-import { useRef } from 'react';
-import Header from '../Header/Header';
+import { useRef, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
-function SearchForm({onSubmit}) {
+function SearchForm({onSubmit, keyword}) {
   const inputRef = useRef();
+  const currPath = useLocation().pathname;
+  
+  useEffect(() => {
+    inputRef.current.value = keyword;
+  }, [currPath])
 
   function handleSubmit(e) {
     e.preventDefault();

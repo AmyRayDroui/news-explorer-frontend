@@ -7,7 +7,7 @@ import SearchForm from '../SearchForm/SearchForm';
 function Main({isLoggedIn, onSubmitSearch, onSaveArticle, onDeleteArticle, isCardsSectionVisible, isLoadingCards, isFoundCards, isErrorSearchOccur, articles, savedArticles, keyword}) {
     return (
       <main className="main">
-        <SearchForm onSubmit={onSubmitSearch}/>
+        <SearchForm onSubmit={onSubmitSearch} keyword={keyword}/>
         <NewsCardList 
           isLoggedIn={isLoggedIn}
           onSaveArticle={onSaveArticle}

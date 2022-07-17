@@ -109,11 +109,27 @@ function App() {
   }
   
   async function handleSaveArticle(card) {
-    return await mainApi.addNewArticle(card);
+    try {
+      const article =  await mainApi.addNewArticle(card);
+      if(article) {
+        setSavedArticles([article, ...savedArticles]);
+        return true;
+      }
+    } catch(e) {
+      return false;
+    }
   }
 
   async function handleDeleteArticle(cardId) {
-    return await mainApi.removeArticle(cardId);
+    try {
+      const article =  await mainApi.removeArticle(cardId);
+      if(article) {
+        setSavedArticles(savedArticles.filter((card) => card._id !== article._id));
+        return true;
+      }
+    } catch(e) {
+      return false;
+    }
   }
 
   async function handleRegister(e) {

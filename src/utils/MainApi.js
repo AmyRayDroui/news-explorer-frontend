@@ -85,7 +85,7 @@ class Api {
   }
   
   const mainApi = new Api({
-    baseUrl: "http://localhost:3001",//"https://api.amyexplorer.students.nomoreparties.sbs",
+    baseUrl: "https://api.amyexplorer.students.nomoreparties.sbs",
     headers: {
       "Content-Type": "application/json",
       "Authorization": ''

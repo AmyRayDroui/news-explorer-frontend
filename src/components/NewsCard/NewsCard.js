@@ -58,7 +58,9 @@ function NewsCard({ card, onSaveArticle, onDeleteArticle, isLoggedIn, keyword, s
       }
     }, [isLoggedIn, savedArticles]);
 
-    
+    function handleArticleOpen() {
+      window.open(articleObj.link);
+    }
 
     async function handleButtonClick() {
       if(isLoggedIn) {
@@ -87,7 +89,7 @@ function NewsCard({ card, onSaveArticle, onDeleteArticle, isLoggedIn, keyword, s
         { currPath==='/saved-news' ? 
         <>    
             <h4 className="news-card__bubble news-card__keyword">{articleObj.keyword}</h4> 
-            <button type="button" className="news-card__bubble news-card__button news-card__button_type_remove"></button>
+            <button type="button" onClick={handleButtonClick} className="news-card__bubble news-card__button news-card__button_type_remove"></button>
             <p className="news-card__bubble news-card__button-hover-text">Remove from saved</p>
         </>:
         <>
@@ -95,7 +97,7 @@ function NewsCard({ card, onSaveArticle, onDeleteArticle, isLoggedIn, keyword, s
             { !isLoggedIn && <p className="news-card__bubble news-card__button-hover-text">Sign in to save articles</p>}
         </>
         }
-        <div className="new-card__text-container">
+        <div className="new-card__text-container" onClick={handleArticleOpen}>
             <p className="new-card__date">{articleObj.date}</p>
             <h3 className="new-card__title">{articleObj.title}</h3>
             <p className="new-card__text">{articleObj.text}</p>
