@@ -37,6 +37,7 @@
 }
 
 .news-list__show-more {
+    display: block;
     background-color: #fff;
     border: none;
     border-radius: 80px;
@@ -47,6 +48,10 @@
     font-weight: 500;
     font-size: 18px;
     line-height: 1.33;
+}
+
+.news-list__show-mor_not-visible {
+    display: none;
 }
 
 .news-list__show-more:hover {
