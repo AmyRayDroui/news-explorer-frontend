@@ -1,6 +1,6 @@
 {
   "name": "news-explorer",
-  "homepage": "https://amyraydroui.github.io/news-explorer-frontend/",
+  "homepage": "http://amyraydroui.github.io/news-explorer-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
