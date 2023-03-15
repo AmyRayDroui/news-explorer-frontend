@@ -11,7 +11,7 @@ A Fullstack Project made by Amy Ray Droui
 - External and Internal API use
 
 ## Deploy
-- [link to deplyed site](https://www.amyexplorer.students.nomoreparties.sbs/)
+- [link to deplyed site](https://www.amyray-newsexplorer.com/)
 
 ## Server code
 - [link to server repository](https://github.com/AmyRayDroui/news-explorer-api)
