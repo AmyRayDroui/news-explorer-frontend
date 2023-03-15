@@ -81,7 +81,7 @@ class Api {
 }
 
 const mainApi = new Api({
-  baseUrl: "http://34.168.247.14",
+  baseUrl: "https://api.amyray-newsexplorer.com",
   headers: {
     "Content-Type": "application/json",
     Authorization: "",
